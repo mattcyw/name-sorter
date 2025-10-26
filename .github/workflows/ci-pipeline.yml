@@ -46,6 +46,13 @@ jobs:
           path: build/reports/tests/test # Path to your generated HTML test reports
           retention-days: 3 # Optional: Set how long to retain the artifact
 
+      - name: Upload JAR Artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ success() }} # Only upload if the build is successful
+        with:
+          name: name-sorter-jar
+          path: build/libs/*.jar # Upload the JAR file from the build output
+
       # 6. Run the application using the bootRun task to ensure it starts successfully
       # We use a timeout to prevent the job from running indefinitely.
       - name: Run application with bootRun

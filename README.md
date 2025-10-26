@@ -49,7 +49,8 @@ This is a simple implementation of Name Sorter application using Java and Spring
 - Gradle `pmd` plugin is used for code quality checks.
 - Gradle configuration files are included to define project settings and dependencies.
 - GitHub Action `./.github/workflows/ci-pipeline.yml` trigger the build pipeline upon pushing changes to both `main` and `dev` branches.  
-- Test reports created in GitHub Action are uploaded as artifacts, such that developers may download them for inspection 
+- Test reports created in GitHub Action are uploaded as artifacts, such that developers may download them for inspection
+- Compiled Jar is also uploaded as artifacts for download
 
 ### 3. (Optional) To have some fun with data structures and algorithms
 
