@@ -16,15 +16,13 @@ This is a simple implementation of Name Sorter application using Java and Spring
 
 - Single Responsibility Principle:
   - CommandLineApplication: Responsible for application startup and command line argument handling.
-  - FileContentSortingEvaluationService: Responsible for evaluating sorting algorithms based on file content
   - Name: Responsible for representing a name entity
   - IterativeBinarySearchTree: Responsible for binary search tree data structure implementation
   - Node: Responsible for representing a node in the binary search tree
   
 
 - Open/Closed Principle:
-    - BinaryTreeNameSortingService: Responsible for sorting names at insertion using a custom implementation of binary tree data structure
-    - CollectionNameSortingService: Responsible for sorting names on demand using Java built-in Collections sorting
+  - FileContentSortingEvaluationService: Open for extension to add sorting algorithm to the evaluation, closed for implementing a sorting algorithm itself
 
 
 - Liskov Substitution Principle: 
@@ -54,8 +52,9 @@ This is a simple implementation of Name Sorter application using Java and Spring
 
 ### 3. (Optional) To have some fun with data structures and algorithms
 
-Leverage this coding exercise to explore the performance of self-implemented binary search tree is differ from the Java built-in Collections sorting
-with various sizes of input data. Preserving duplicated entries also make it differ from Java built-in Tree Map(Key) / Set.
+Leverage this coding exercise to explore how the time and memory performance of self-implemented binary search tree (sort at insert) 
+is differed from the Java built-in Collections sorting (sort on demand) with different testing data size and patterns. 
+Preserving duplicated entries also make it differ from Java built-in Tree Map(Key) / Set.
 To switch between the two sorting implementations, change the property `app.service.type` in `src/main/resources/application.yml`
 By default, the application is configured to use the self-implemented binary search tree `binaryTree`.
 
