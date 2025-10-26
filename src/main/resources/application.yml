@@ -1,0 +1,15 @@
+app:
+  service:
+    type: "binaryTree" # Options: binaryTree [default] | collection
+  input.file: files/unsorted-names-list.txt
+  output.file: files/sorted-names-list.txt
+logging:
+  file:
+    name: logs/nameSorter.log
+    max-size: 10MB
+  rollingpolicy:
+    max-history: 3
+    total-size-cap: 50MB
+  level:
+    com.example.dd.nameSorter: INFO
+    org.springframework: INFO
