@@ -102,7 +102,7 @@ Arguments below are optional, default values are located in the `src/main/resour
 ```
 ./gradlew bootRun --args="files/sorted-names-list.txt files/unsorted-names-list.txt"
 ```
-- 2a. Run the jar file that has already been built directly, use the command below:
+- 2a. Run the jar file that has already been built locally or download as artifact from GitHub Action, use the command below:
 ```
 java -jar build/libs/NameSorter-0.0.1-SNAPSHOT.jar
 ```
