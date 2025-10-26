@@ -40,6 +40,7 @@ jobs:
 
       - name: Upload test reports
         uses: actions/upload-artifact@v4
+        if: ${{ always() }}
         with:
           name: gradle-test-reports
           path: build/reports/tests/test # Path to your generated HTML test reports
