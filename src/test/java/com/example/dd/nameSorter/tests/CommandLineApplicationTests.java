@@ -101,7 +101,7 @@ public class CommandLineApplicationTests {
     @Test
     @Order(3)
     void testFailureOnStructuralInvalidInputPath(final CapturedOutput output) throws Exception {
-        runApplication(new String[]{"files/in:put.txt", DEFAULT_OUTPUT.toString()});
+        runApplication(new String[]{"files/in\0put.txt", DEFAULT_OUTPUT.toString()});
         
         assertTrue(output.getOut().contains("Structural path error"), "Expected structural error log.");
         assertFalse(Files.exists(DEFAULT_OUTPUT), "Output file should not be created.");
@@ -112,7 +112,7 @@ public class CommandLineApplicationTests {
     @Test
     @Order(4)
     void testFailureOnStructuralInvalidOutputPath(final CapturedOutput output) throws Exception {
-        runApplication(new String[]{DEFAULT_INPUT.toString(), "files/out:put.txt"});
+        runApplication(new String[]{DEFAULT_INPUT.toString(), "files/out\0put.txt"});
         
         assertTrue(output.getOut().contains("Structural path error"), "Expected structural error log.");
         assertFalse(Files.exists(DEFAULT_OUTPUT), "Output file should not be created.");

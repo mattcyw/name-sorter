@@ -48,7 +48,8 @@ This is a simple implementation of Name Sorter application using Java and Spring
 - Gradle tasks are defined for building, testing (JUnit + Cucumber), and running the application.
 - Gradle `pmd` plugin is used for code quality checks.
 - Gradle configuration files are included to define project settings and dependencies.
-
+- GitHub Action `./.github/workflows/ci-pipeline.yml` trigger the build pipeline upon pushing changes to both `main` and `dev` branches.  
+- Test reports created in GitHub Action are uploaded as artifacts, such that developers may download them for inspection 
 
 ### 3. (Optional) To have some fun with data structures and algorithms
 
@@ -112,7 +113,8 @@ java -jar build/libs/NameSorter-0.0.1-SNAPSHOT.jar "files/sorted-names-list.txt"
 ---
 ## Testing Notes
 - Simple input validation tests `CommandLineApplicationTests` are created with Junit
-- Behavioral tests `NameSortingCorde` are created with Cucumber (*.feature supported by *Steps.java)
+- Behavioral Driven tests `NameSortingCore` are created with Cucumber (*.feature supported by *Steps.java)
+- Cucumber tests covers all scenario examples in the features with the same single set of test steps, improve maintainability  
 - Predefined test data files (input and expected results) are stored under `src/test/resources/files`
 - Output directory is `files`
 
