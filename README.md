@@ -76,11 +76,13 @@ You can adjust the log level and other settings in the `src/main/resources/appli
 ---
 ## How to Build
 Pre-requisite: JDK 17 installed and have the root folder (for example only, jbr-17.0.14) configured as JAVA_HOME in your PATH.
-And the build tool is Gradle.
-```
+
+Gradle is bundled within the project, no installation is required.
+``` 
 ./gradlew build
 ```
 Test Cases: Test cases are implemented and will be executed during the build process.
+
 Or run test cases only:
 ```
 ./gradlew test

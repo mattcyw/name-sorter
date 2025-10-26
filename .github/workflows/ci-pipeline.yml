@@ -6,6 +6,8 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ "main", "dev" ]
+    paths-ignore:
+      - '**.md'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
