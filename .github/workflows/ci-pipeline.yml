@@ -38,6 +38,13 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-test-reports
+          path: build/reports/tests/test # Path to your generated HTML test reports
+          retention-days: 3 # Optional: Set how long to retain the artifact
+
       # 6. Run the application using the bootRun task to ensure it starts successfully
       # We use a timeout to prevent the job from running indefinitely.
       - name: Run application with bootRun
