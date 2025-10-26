@@ -1,0 +1,62 @@
+# This GitHub Actions workflow builds and tests the Name Sorter application.
+# It is triggered on pushes to the 'main' and 'dev' branches, and can also be run manually.
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  build-and-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up JDK 17, as required by your build.gradle file
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # 3. Configures the Gradle wrapper and caches dependencies for faster builds
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      # 4. Grant execute permission for the Gradle wrapper script to avoid permission issues
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      # 5. Run the 'build' task, which will compile the code and run all tests
+      # The 'build' task automatically triggers the 'test' task.
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: gradle-test-reports
+          path: build/reports/tests/test # Path to your generated HTML test reports
+          retention-days: 3 # Optional: Set how long to retain the artifact
+
+      - name: Upload JAR Artifact
+        uses: actions/upload-artifact@v4
+        if: ${{ success() }} # Only upload if the build is successful
+        with:
+          name: name-sorter-jar
+          path: build/libs/*.jar # Upload the JAR file from the build output
+
+      # 6. Run the application using the bootRun task to ensure it starts successfully
+      # We use a timeout to prevent the job from running indefinitely.
+      - name: Run application with bootRun
+        run: |
+          timeout 30s ./gradlew bootRun || (
+            if [ $? -eq 124 ]; then echo "bootRun timed out after 30s, which is expected."; exit 0; else exit $?; fi
+          )

@@ -82,12 +82,16 @@ public class CommandLineApplication {
                     logger.info("Resolved Output file path: {}", outputFilePath);
                     final Path outputPath = Paths.get(outputFilePath);
 
-                    if (outputPath.getParent() == null) {
-                        logger.error("Output path is not writable: {}; Parent is null.", outputFilePath);
-                        return;
-                    }
-                    if (!Files.exists(outputPath.getParent())) {
-                        Files.createDirectory(outputPath.getParent());
+                    if (outputPath.getParent() != null) {
+                        // create parent directories if they don't exist, such that output file can be created from within
+                        if (!Files.exists(outputPath.getParent())) {
+                            Files.createDirectory(outputPath.getParent());
+                        }
+                    }else {
+                        // test if output file is writable in advance
+                        Files.write(outputPath, "".getBytes(),
+                            StandardOpenOption.CREATE,
+                            StandardOpenOption.WRITE);
                     }
                 }catch (IOException e) {
                     logger.error("Output path is not writable: {}; Error: {}", outputFilePath, e.getMessage());
