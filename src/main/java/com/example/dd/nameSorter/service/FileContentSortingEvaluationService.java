@@ -17,6 +17,8 @@ public abstract class FileContentSortingEvaluationService {
     /**
      * Reads names from the specified input file.
      * Sorting is performed here when using a sorted data structure.
+     * i.e. Sort at insertion
+     * Because we don't want to undermine memory efficiency by using separated spaces for sorting
      * @param inputFilePath the path to the input file
      * @return a collection of names read from the file
      */
@@ -25,7 +27,7 @@ public abstract class FileContentSortingEvaluationService {
     /**
      * Writes the sorted names to the specified output file.
      * Sorting is performed here when not using a sorted data structure.
-     * i.e. Sorting happens just before writing to the file.
+     * i.e. Sort on demand (before writing it back to file)
      * @param nameList the collection of names to write
      * @param outputFilePath the path to the output file
      * @return a list of names written to the file
